@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  mySQLcontained:
+    image: "mysql:latest"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    ports:
+      - 3307:3306
+  
+  websvr:
+    build: ./LAMPcontained
+    volumes:
+      - "./LAMPcontained/data:/var/www/html"
+    ports:
+      - 5000:80
+    links:
+      - mySQLcontained
+    depends_on:
+      - mySQLcontained
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: PMAcontained
+    environment:
+      - PMA_HOST=mySQLcontained
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - PMA_PORT=3306
+    ports:
+      - 8080:80
