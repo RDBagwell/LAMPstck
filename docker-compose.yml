@@ -3,8 +3,13 @@ version: "3"
 services:
   mySQLcontained:
     image: "mysql:latest"
+    restart: always
     environment:
+      - MYSQL_ROOT_USER=root
       - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=homestead
+    volumes:
+        - ./init.sql:/docker-entrypoint-initdb.d/init-script.sql
     ports:
       - 3307:3306
   
@@ -26,5 +31,6 @@ services:
       - PMA_HOST=mySQLcontained
       - MYSQL_ROOT_PASSWORD=rootpassword
       - PMA_PORT=3306
+      
     ports:
       - 8080:80
