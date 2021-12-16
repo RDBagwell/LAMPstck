@@ -5,9 +5,9 @@ services:
     image: "mysql:latest"
     restart: always
     environment:
-      - MYSQL_ROOT_USER=root
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=homestead
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     volumes:
         - ./init.sql:/docker-entrypoint-initdb.d/init-script.sql
     ports:
@@ -28,9 +28,9 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: PMAcontained
     environment:
-      - PMA_HOST=mySQLcontained
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - PMA_PORT=3306
+      - PMA_HOST=${PMA_HOST}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - PMA_PORT=${PMA_PORT}
       
     ports:
       - 8080:80

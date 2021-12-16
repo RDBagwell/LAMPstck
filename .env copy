@@ -1,0 +1,7 @@
+PMA_HOST=<host>
+MYSQL_ROOT_PASSWORD=<root password>
+PMA_PORT=<port>
+
+MYSQL_ROOT_USER=<Database User>
+MYSQL_ROOT_PASSWORD=<root password>
+MYSQL_DATABASE=<Database Name>
