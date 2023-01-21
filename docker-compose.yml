@@ -8,11 +8,12 @@ services:
       - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}
     volumes:
-        - ./init.sql:/docker-entrypoint-initdb.d/init-script.sql
+      - devphp-mysql-data:/var/lib/mysql
+      - ./init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
     ports:
-      - 3307:3306
-  
+      - 3306:3306
   websvr:
     build: ./LAMPcontained
     volumes:
@@ -30,7 +31,9 @@ services:
     environment:
       - PMA_HOST=${PMA_HOST}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_USER=${MYSQL_ROOT_USER}
       - PMA_PORT=${PMA_PORT}
-      
     ports:
       - 8080:80
+volumes:
+  devphp-mysql-data:      
